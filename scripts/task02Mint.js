@@ -13,23 +13,23 @@ const sendShieldedTransaction = async (signer, destination, data, value) => {
 };
 
 async function main() {
-    const contractAddress = '0xa4E62cB305a5E869aE8e5784897387b8f9469134';
+    const contractAddress = '0xa4E62cB305a5E869aE8e5784897387b8f9469134'; // Prev contract created
     const [signer] = await hre.ethers.getSigners();
 
     const contractFactory = await hre.ethers.getContractFactory("CMAToken");
     const contract = contractFactory.attach(contractAddress);
 
     const functionName = "mint1000tokens";
-    const mint100TokensTx = await sendShieldedTransaction(
+    const mint1000TokensTx = await sendShieldedTransaction(
         signer,
         contractAddress,
         contract.interface.encodeFunctionData(functionName),
         0
     );
 
-    await mint100TokensTx.wait();
+    await mint1000TokensTx.wait();
 
-    console.log("Transaction Receipt: ", mint100TokensTx.hash);
+    console.log("Transaction Receipt: ", mint1000TokensTx.hash);
 }
 
 main().catch((error) => {
